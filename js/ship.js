@@ -1,8 +1,9 @@
 class Ship {
-    constructor(x, y, size = 30, a = 90 / 180 * Math.PI, color = "white") {
+    constructor(x, y, size = 30, ship_thrust = 5, a = 90 / 180 * Math.PI, color = "white") {
         this.x = x;
         this.y = y;
         this.size = size;
+        this.ship_thrust = ship_thrust;
         this.r = this.size / 2;
         this.a = a;
         this.color = color;
@@ -26,6 +27,14 @@ class Ship {
         );
         ctx.closePath();
         ctx.stroke();
+    }
+
+    moveLeft() {
+        ship.x -= ship.ship_thrust;
+    }
+
+    moveRight() {
+        ship.x += ship.ship_thrust;
     }
 
 }
