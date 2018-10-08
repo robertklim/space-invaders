@@ -7,6 +7,8 @@ class Ship {
         this.r = this.size / 2;
         this.a = a;
         this.color = color;
+        this.canShoot = true;
+        this.lasers = new Array();
     }
 
     draw() {
@@ -30,11 +32,24 @@ class Ship {
     }
 
     moveLeft() {
-        ship.x -= ship.ship_thrust;
+        this.x -= this.ship_thrust;
     }
 
     moveRight() {
-        ship.x += ship.ship_thrust;
+        this.x += this.ship_thrust;
+    }
+
+    shootLaser(laser_max = 5) {
+        // create laser object
+        if (this.canShoot && this.lasers.length < laser_max) {
+            this.lasers.push({
+                x: this.x + 4 / 3 * this.r * Math.cos(this.a),
+                y: this.y - 4 / 3 * this.r * Math.sin(this.a),
+                xv: LASER_SPD * Math.cos(this.a) / FPS,
+                yv: -LASER_SPD * Math.sin(this.a) / FPS,
+                dist: 0
+            });
+        }
     }
 
 }
